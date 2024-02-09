@@ -26,7 +26,7 @@
 __thread ssmem_allocator_t* alloc;
 LOCK_LOCAL_DATA;
 
-size_t array_ll_fixed_size;
+extern size_t array_ll_fixed_size;
 
 inline void 
 cpy_delete_copy(ssmem_allocator_t* alloc, array_ll_t* a)
