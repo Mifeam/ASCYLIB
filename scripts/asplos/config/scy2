@@ -6,6 +6,7 @@ LATENCY_POINTS=512
 LATENCY_PARSE=0
 
 reps=11;
+#reps=11;
 keep=median 			# min, median, or max
 duration=5000;
 initials="1024";
@@ -14,10 +15,10 @@ cores="all";
 cores_pow="all"
 
 COMPILE_FLAGS="SET_CPU=1"
-skip_thr=1;
-skip_lat=0;
-skip_ldi=0;
-skip_pow=0;
+skip_thr=0;
+skip_lat=1;
+skip_ldi=1;
+skip_pow=1;
 
 do_ll=0;
 do_ht=0;

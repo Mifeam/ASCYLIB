@@ -4,6 +4,7 @@ LATENCY_TYPE=3			# 2 or 3
 LATENCY_POINTS=1024
 LATENCY_MERGE=1
 
+#reps=1;
 reps=11;
 keep=median 			# min, median, or max
 duration=5000;
@@ -13,12 +14,17 @@ cores="all";
 cores_pow="all"
 
 COMPILE_FLAGS="SET_CPU=1"
-skip_thr=1;
-skip_lat=0;
-skip_ldi=0;
-skip_pow=0;
+skip_thr=0;
+skip_lat=1;
+skip_ldi=1;
+skip_pow=1;
 
 do_ll=1;
 do_ht=0;
 do_sl=0;
 do_bst=0;
+#//do_ll=0;
+#//do_ht=1;
+#//do_sl=1;
+#//do_bst=1;
+
