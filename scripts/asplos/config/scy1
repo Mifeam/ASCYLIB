@@ -5,7 +5,7 @@ LATENCY_POINTS=1024
 LATENCY_MERGE=1
 
 #reps=1;
-reps=11;
+reps=1;
 keep=median 			# min, median, or max
 duration=5000;
 initials="1024";

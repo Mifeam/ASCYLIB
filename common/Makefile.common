@@ -186,6 +186,12 @@ endif
     CFLAGS += -DT44
 endif
 
+ifeq ($(PC_NAME), node-0.ming589-190606.advosuwmadison-pg0.wisc.cloudlab.us)
+    PLATFORM_KNOWN = 1
+    PLATFORM_NUMA = 0
+    CFLAGS += -DC220G5
+endif
+
 ifneq ($(PLATFORM_KNOWN), 1)
     CFLAGS += -DDEFAULT
     PLATFORM_NUMA = 0

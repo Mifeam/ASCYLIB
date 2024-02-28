@@ -249,8 +249,8 @@ extern "C" {
 
   //machine dependent parameters
 #if defined(DEFAULT)
-#  define NUMBER_OF_SOCKETS 1
-#  define CORES_PER_SOCKET  CORE_NUM
+#  define NUMBER_OF_SOCKETS 2
+#  define CORES_PER_SOCKET  20
 #  define CACHE_LINE_SIZE   64
 #  define NOP_DURATION      2
   static uint8_t __attribute__ ((unused)) the_cores[] =
@@ -264,6 +264,29 @@ extern "C" {
     };
 #endif  /*  */  
 
+#if defined(C220G5)
+#  define NUMBER_OF_SOCKETS 2
+#  define CORES_PER_SOCKET  20
+#  define CACHE_LINE_SIZE   64
+#  define NOP_DURATION      2
+  static uint8_t UNUSED the_cores[] =
+    {
+      0, 1, 2, 3, 4, 5, 6, 7, 
+      8, 9, 10, 11, 12, 13, 14, 15, 
+      16, 17, 18, 19, 20, 21, 22, 23, 
+      24, 25, 26, 27, 28, 29, 30, 31, 
+      32, 33, 34, 35, 36, 37, 38, 39, 
+      40
+    };
+  static uint8_t UNUSED the_sockets[] = {
+      0, 0, 0, 0, 0, 0, 0, 0, 
+      0, 0, 1, 1, 1, 1, 1, 1, 
+      1, 1, 1, 1, 0, 0, 0, 0, 
+      0, 0, 0, 0, 0, 0, 1, 1, 
+      1, 1, 1, 1, 1, 1, 1, 1, 
+      1
+  };
+#endif  /*  */  
 
 #ifdef MAGLITE
 #  define NUMBER_OF_SOCKETS 8

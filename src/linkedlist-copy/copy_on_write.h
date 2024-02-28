@@ -62,6 +62,7 @@ typedef volatile struct kv
 
 typedef ALIGNED(CACHE_LINE_SIZE) struct array_ll
 {
+  ptlock_t* lock;
   size_t size;
   kv_t* kvs;
 } array_ll_t;

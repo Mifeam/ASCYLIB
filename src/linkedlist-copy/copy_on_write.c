@@ -33,7 +33,7 @@ cpy_delete_copy(ssmem_allocator_t* alloc, array_ll_t* a)
 {
 #if GC == 1
 #  if CPY_ON_WRITE_USE_MEM_RELEAS == 1
-  SSMEM_SAFE_TO_RECLAIM();
+  //SSMEM_SAFE_TO_RECLAIM();
   ssmem_release(alloc, (void*) a);
 #  else
   ssmem_free(alloc, (void*) a);
