@@ -124,7 +124,9 @@ list_insert(intset_l_t* set, skey_t key, sval_t val)
       return 0; 
     }
 #else
-  node_l_t* left = search_strong(set, key, &right);
+  node_l_t* 
+    
+     = search_strong(set, key, &right);
 #endif
 
   if (right != NULL && right->key == key)

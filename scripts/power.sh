@@ -40,7 +40,6 @@ progs_num=$(echo $progs | wc -w);
 params="$@";
 
 print_n "#   " "%-48s" "$progs" "\n"
-
 print_rep "#co " $progs_num "Thrput     Thrput/W    Power       uJ/op        " "\n";
 
 d=0;
@@ -61,6 +60,7 @@ do
     do
 	i=$(($i+1));
 	res=$($run_script ./$p $params -n$c);
+  #echo $run_script ./$p $params -n$c
 	printf "%-11d%-12.2f%-12.6f%-13.6f" $res
     done;     
     echo "";

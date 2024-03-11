@@ -186,7 +186,7 @@ endif
     CFLAGS += -DT44
 endif
 
-ifeq ($(PC_NAME), node-0.ming589-190606.advosuwmadison-pg0.wisc.cloudlab.us)
+ifeq ($(PC_NAME), node-0.ming589-193965.advosuwmadison-pg0.wisc.cloudlab.us)
     PLATFORM_KNOWN = 1
     PLATFORM_NUMA = 0
     CFLAGS += -DC220G5

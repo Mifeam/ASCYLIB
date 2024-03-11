@@ -48,7 +48,7 @@
 #endif
 
 #include "hashtable-seq.h"
-
+#include "sspfd.h"
 /* ################################################################### *
  * Definition of macros: per data structure
  * ################################################################### */
@@ -161,6 +161,7 @@ test(void* thread)
   ssmem_alloc_init_fs_size(alloc, SSMEM_DEFAULT_MEM_SIZE, SSMEM_GC_FREE_SET_SIZE, ID);
 #endif
 
+  int phys_id = sched_getcpu();
   RR_INIT(phys_id);
   barrier_cross(&barrier);
 

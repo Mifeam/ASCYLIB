@@ -1,0 +1,9 @@
+# Result from 1 repetitions: median
+#   ./bin/node-0.ming589-193965.advosuwmadison-pg0.wisc.cloudlab.us/sq-ht
+#co Thrput     Thrput/W    Power       uJ/op        
+2   50628631   0.00        0.000000    0.000000     
+3   73662382   0.00        0.000000    0.000000     
+4   96855462   0.00        0.000000    0.000000     
+5   119225296  0.00        0.000000    0.000000     
+6   141742453  0.00        0.000000    0.000000     
+7   

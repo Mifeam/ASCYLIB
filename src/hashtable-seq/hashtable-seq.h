@@ -23,6 +23,7 @@
 
 #include "./lists/intset.h"
 
+
 #define DEFAULT_MOVE                    0
 #define DEFAULT_SNAPSHOT                0
 #define DEFAULT_LOAD                    1

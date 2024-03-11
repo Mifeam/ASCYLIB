@@ -32,6 +32,6 @@ You may pass the following settings to `make`:
             2 : enable stats for per-thread completed ops
 	    3 : enable both 1 and 2
     * PAD=1 : enabled node padding. NB. not all data structures support this properly for now
-    * SEQ_NO_FREE=1 : make the SEQ implementations NOT use the ssmem_free (but uses SSMEM)
+    * SEQ_NO_FREE=1 : make the SEQ implementations NOT use the  (but uses SSMEM)
 Example:
 	make VERSION=DEBUG GC=0

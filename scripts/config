@@ -58,7 +58,7 @@ then
 elif [ $unm = "lpdxeon2680" ];
 then
 	max_cores=40;
-elif [ $unm = "node-0.ming589-190606.advosuwmadison-pg0.wisc.cloudlab.us" ];
+elif [ $unm = "node-0.ming589-193965.advosuwmadison-pg0.wisc.cloudlab.us" ];
 then
 	max_cores=40;
 elif [ $unm = "ol-collab1" ];

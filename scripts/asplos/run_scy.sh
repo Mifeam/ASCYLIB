@@ -28,7 +28,8 @@ fi;
 # default data structures
 #lls="./$ub/sq-ll ./$ub/lb-ll_lazy ./$ub/lb-ll_pugh ./$ub/lb-ll_copy ./$ub/lf-ll_harris ./$ub/lf-ll_michael ./$ub/lf-ll_harris_opt";
 lls="./$ub/lb-ll_copy";
-hts="./$ub/sq-ht ./$ub/lb-ht_coupling_gl ./$ub/lb-ht_lazy_gl ./$ub/lb-ht_pugh_gl ./$ub/lb-ht_copy ./$ub/lf-ht_rcu ./$ub/lb-ht_java ./$ub/lb-ht_tbb ./$ub/lf-ht";
+#hts="./$ub/sq-ht ./$ub/lb-ht_coupling_gl ./$ub/lb-ht_lazy_gl ./$ub/lb-ht_pugh_gl ./$ub/lb-ht_copy ./$ub/lf-ht_rcu ./$ub/lb-ht_java ./$ub/lb-ht_tbb ./$ub/lf-ht";
+hts="./$ub/lf-ht_harris";
 sls="./$ub/sq-sl ./$ub/lb-sl_pugh ./$ub/lb-sl_herlihy ./$ub/lf-sl_fraser  ./$ub/lf-sl_herlihy";
 bsts="./$ub/sq-bst_internal ./$ub/sq-bst_external ./$ub/lb-bst_bronson ./$ub/lb-bst-drachsler ./$ub/lf-bst_ellen ./$ub/lf-bst-howley ./$ub/lf-bst-aravind";
 
@@ -56,9 +57,11 @@ then
 fi;
 
 out_folder=data;
+echo $hts;
 
 source ${config_execs};
 source ${config_workload};
+echo $hts;
 
 if [ "${SCY}0" = "0" ];
 then
@@ -237,7 +240,7 @@ fi;
     # ht ##################################################################
     if [ $do_ht -eq 1 ];
     then
-	structure=ht;
+	structure=lfht; #TODO
 
 	if [ ! "${MAKE_CLHT}0" = 0 ];
 	then
@@ -249,7 +252,7 @@ fi;
 	fi;
 
 	${MAKE} -k ${structure} POWER=1 ${COMPILE_FLAGS} SET_CPU=1;
-	mv bin/*${structure}* $ub;
+	mv bin/lf-ht_harris $ub;
 
 	echo "~~~~~~~~~~~~ Working on ${structure}";
 	for i in $initials;
@@ -365,6 +368,7 @@ then
 		params="-i$i -r$r -u$u -d$duration";
 		dat=$out_folder/${SCY}.${structure}.thr.$un.i$i.u$u.dat;
 		echo "~~~~~~~~ $params @ $dat";
+    echo $hts;
 		./scripts/scalability_rep.sh "$cores" $reps $keep "$hts" $params | tee $dat; 
 	    done;
 	done;
@@ -446,7 +450,7 @@ then
     # ht ##################################################################
     if [ $do_ht -eq 1 ];
     then
-	structure=ht;
+	structure=lfht;
 
 	if [ ! "${MAKE_CLHT}0" = 0 ];
 	then
@@ -458,7 +462,7 @@ then
 	fi;
 
 	${MAKE} -k ${structure} LATENCY=${LATENCY_AVG_TYPE} ${COMPILE_FLAGS};
-	mv bin/*${structure}* $ub;
+	mv bin/*lf-ht_harris* $ub;
 
 	echo "~~~~~~~~~~~~ Working on ${structure}";
 
@@ -556,7 +560,7 @@ then
     # ht ##################################################################
     if [ $do_ht -eq 1 ];
     then
-	structure=ht;
+	structure=seqht;
 
 	if [ ! "${MAKE_CLHT}0" = 0 ];
 	then
@@ -568,7 +572,7 @@ then
 	fi;
 
 	make ${structure} LATENCY=$LATENCY_TYPE ${COMPILE_FLAGS};
-	mv bin/*${structure}* $ub;
+	mv bin/*sq-ht* $ub;
 
 	echo "~~~~~~~~~~~~ Working on ${structure}";
 
