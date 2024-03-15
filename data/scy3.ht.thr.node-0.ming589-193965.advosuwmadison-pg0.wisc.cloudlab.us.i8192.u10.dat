@@ -1,4 +1,4 @@
 # Result from 11 repetitions: median
-#       ./bin/node-0.ming589-193965.advosuwmadison-pg0.wisc.cloudlab.us/sq-ht./bin/node-0.ming589-193965.advosuwmadison-pg0.wisc.cloudlab.us/lb-ht_lazy_gl_no_ro./bin/node-0.ming589-193965.advosuwmadison-pg0.wisc.cloudlab.us/lb-ht_lazy_gl./bin/node-0.ming589-193965.advosuwmadison-pg0.wisc.cloudlab.us/lb-ht_pugh_gl_no_ro./bin/node-0.ming589-193965.advosuwmadison-pg0.wisc.cloudlab.us/lb-ht_pugh_gl./bin/node-0.ming589-193965.advosuwmadison-pg0.wisc.cloudlab.us/lb-ht_copy_no_ro./bin/node-0.ming589-193965.advosuwmadison-pg0.wisc.cloudlab.us/lb-ht_copy./bin/node-0.ming589-193965.advosuwmadison-pg0.wisc.cloudlab.us/lb-ht_java_no_ro./bin/node-0.ming589-193965.advosuwmadison-pg0.wisc.cloudlab.us/lb-ht_java./bin/node-0.ming589-193965.advosuwmadison-pg0.wisc.cloudlab.us/lf-ht_harris
-#cores  throughput  %linear scalability throughput  %linear scalability throughput  %linear scalability throughput  %linear scalability throughput  %linear scalability throughput  %linear scalability throughput  %linear scalability throughput  %linear scalability throughput  %linear scalability throughput  %linear scalability 
-1       
+#       ./bin/node-0.ming589-193965.advosuwmadison-pg0.wisc.cloudlab.us/hyhtm./bin/node-0.ming589-193965.advosuwmadison-pg0.wisc.cloudlab.us/lfhtm
+#cores  throughput  %linear scalability throughput  %linear scalability 
+1       37413349    100.00  1           

@@ -32,8 +32,8 @@ RETRY_STATS_VARS;
 inline int
 parse_validate(node_l_t* pred, node_l_t* curr) 
 {
-  return (!pred->marked && (curr == NULL || (!curr->marked)) && (pred->next == curr));
-  // return ((pred->next == curr));
+  //return (!pred->marked && (curr == NULL || (!curr->marked)) && (pred->next == curr));
+  return (!pred->marked && pred->next == curr);
 }
 
 sval_t
@@ -93,7 +93,7 @@ parse_insert(intset_l_t *set, skey_t key, sval_t val)
 	{
 	  LOCK(ND_GET_LOCK(curr));
 	}
-      if (!pred->marked && pred->next == curr) // DONE: improvement, which is parse_validate before
+      if (parse_validate(pred, curr)) // DONE: improvement, which is parse_validate before
 	{
 	  result = (curr == NULL) || (curr->key != key);
 	  if (result) 
@@ -156,7 +156,7 @@ parse_delete(intset_l_t *set, skey_t key)
 	  LOCK(ND_GET_LOCK(curr));
 	}
 
-      if (!pred->marked && pred->next == curr) // DONE: improvement, which is parse_validate before
+      if (parse_validate(pred, curr)) // DONE: improvement, which is parse_validate before
 	{
 	  if (curr != NULL && key == curr->key)
 	    {

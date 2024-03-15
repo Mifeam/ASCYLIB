@@ -18,7 +18,8 @@ then
 	CORES=eight
 	hts="./$ub/sq-ht ./$ub/lb-ht_lazy_gl ./$ub/lb-ht_pugh_gl ./$ub/lb-ht_coupling_gl ./$ub/lf-ht ./$ub/hyhtm ./$ub/lfhtm";
 else
-	hts="./$ub/sq-ht ./$ub/lb-ht_lazy_gl ./$ub/lb-ht_pugh_gl ./$ub/lf-ht_rcu ./$ub/lf-ht ./$ub/hyhtm ./$ub/lfhtm";
+	#hts="./$ub/sq-ht ./$ub/lb-ht_lazy_gl ./$ub/lb-ht_pugh_gl ./$ub/lf-ht_rcu ./$ub/lf-ht ./$ub/hyhtm ./$ub/lfhtm";
+  hts="./$ub/hyhtm ./$ub/lfhtm";
 fi;
 
 CLHT_PATH=~/code/hyht

@@ -450,7 +450,7 @@ then
     # ht ##################################################################
     if [ $do_ht -eq 1 ];
     then
-	structure=lfht;
+	structure=ht;
 
 	if [ ! "${MAKE_CLHT}0" = 0 ];
 	then
@@ -462,7 +462,7 @@ then
 	fi;
 
 	${MAKE} -k ${structure} LATENCY=${LATENCY_AVG_TYPE} ${COMPILE_FLAGS};
-	mv bin/*lf-ht_harris* $ub;
+	mv bin/*${structure}* $ub;
 
 	echo "~~~~~~~~~~~~ Working on ${structure}";
 

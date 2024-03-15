@@ -1,7 +1,7 @@
 SCY=scy3
 
 hts="./$ub/sq-ht ./$ub/lb-ht_lazy_gl_no_ro ./$ub/lb-ht_lazy_gl ./$ub/lb-ht_pugh_gl_no_ro ./$ub/lb-ht_pugh_gl ./$ub/lb-ht_copy_no_ro ./$ub/lb-ht_copy ./$ub/lb-ht_java_no_ro ./$ub/lb-ht_java ./$ub/lf-ht_harris";
-#hts="./$ub/sq-ht";
+hts="./$ub/hyhtm ./$ub/lfhtm";
 cores_lat_dist="1 10 20";
 LATENCY_TYPE=3			# 2 or 3
 LATENCY_POINTS=256

@@ -171,33 +171,37 @@ chm_seg_rehash(chm_t* set, int seg_num, chm_node_t* new)
 	    }
 	  else
 	    {			/* reuse consecutive sequence at same slot */
-	      chm_node_t* last_run = curr;
-	      int last_idx = idx;
-	      chm_node_t* last;
-	      for (last = next; last != NULL; last = last->next)
-		{
-		  int k = hash(last->key, set->hash_seed) & mask_new;
-		  if (k != last_idx)
-		    {
-		      last_idx = k;
-		      last_run = last;
-		    }
-		}
-	      seg_new->table[last_idx] = last_run;
+	  //     chm_node_t* last_run = curr;
+	  //     int last_idx = idx;
+	  //     chm_node_t* last;
+	  //     for (last = next; last != NULL; last = last->next)
+		// {
+		//   int k = hash(last->key, set->hash_seed) & mask_new;
+		//   if (k != last_idx)
+		//     {
+		//       last_idx = k;
+		//       last_run = last;
+		//     }
+		// }
+	      //seg_new->table[last_idx] = last_run; //DONE: Improvement delete those things
 	      /* clone remaining */
 	      chm_node_t* p;
-	      for (p = curr; p != last_run; p = p->next)
+	      // for (p = curr; p != last_run; p = p->next) //DONE: Improvement delete those things
+        for (p = curr; p != NULL; p = p->next)
 		{
 		  int k = hash(p->key, set->hash_seed) & mask_new;
 		  chm_node_t* n = chm_node_new(p->key, p->val, seg_new->table[k]);
 		  seg_new->table[k] = n;
 #if GC == 1
+      //printf("ad--");
 		  ssmem_free(alloc, (void*) p);
+      //printf("finished\n");
 #endif
 		}
 	      
 	    }
 	}
+  ssmem_free(alloc,seg_old->table[b]);
     }
 
   int new_idx = hash(new->key, set->hash_seed) & mask_new; /* add the new node */
@@ -208,8 +212,10 @@ chm_seg_rehash(chm_t* set, int seg_num, chm_node_t* new)
   set->segments[seg_num] = seg_new;
 
 #if GC == 1
-  ssmem_release(alloc, (void*) seg_old);
-  ssmem_release(alloc, seg_old->table);
+    //ssmem_free(alloc, seg_old->table);
+    ssmem_free(alloc, (void*) seg_old);
+   //ssmem_release(alloc, (void*) seg_old);
+   //ssmem_release(alloc, seg_old->table);
 #endif
 }
 
@@ -298,6 +304,7 @@ chm_put(chm_t* set, skey_t key, sval_t val)
   int seg_num = key & set->hash;
 
 #if CHM_READ_ONLY_FAIL == 1
+//printf("advaned\n");
   seg = set->segments[seg_num];
   if (chm_contains(set, seg, key) != 0)
     {
@@ -347,6 +354,7 @@ chm_put(chm_t* set, skey_t key, sval_t val)
       printf("-[%3d]- seg size limit %u :: resize\n", seg_num, seg->size_limit);
 #endif
       chm_seg_rehash(set, seg_num, n);
+      //UNLOCK_A(seg_lock);
     }
   else
     {
@@ -411,10 +419,11 @@ chm_rem(chm_t* set, skey_t key)
 #endif
 
 #if CHM_TRY_PREFETCH == 1
+printf("---CHM_TRY_PREFETCH---\n");
   int walks = 0;
 #endif
 
-  LOCK_TRY_ONCE_CLEAR();
+ LOCK_TRY_ONCE_CLEAR();
   do 
     {
       seg = set->segments[seg_num];
@@ -428,6 +437,14 @@ chm_rem(chm_t* set, skey_t key)
 #endif
     }
   while (!TRYLOCK_A(seg_lock));
+// int result
+//       do{
+//       seg = set->segments[seg_num];
+//       seg_lock = &seg->lock;
+//       result = pthread_mutex_trylock(seg_lock);
+//       if(result != 0) printf("%d",result);
+//       }
+//       while(result != 0);
 
   chm_node_t** bucket = &seg->table[hash(key, set->hash_seed) & seg->hash];
   chm_node_t* curr = *bucket;
@@ -446,7 +463,9 @@ chm_rem(chm_t* set, skey_t key)
 	      *bucket = curr->next;
 	    }
 #if GC == 1
+    //printf("rm%ld-", key);
 	  ssmem_free(alloc, (void*) curr);
+    //printf("-%ldfinished\n",key);
 #endif
 	  seg->size--;
 	  UNLOCK_A(seg_lock);
