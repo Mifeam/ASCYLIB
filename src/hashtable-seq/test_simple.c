@@ -125,7 +125,9 @@ test(void* thread)
 {
   thread_data_t* td = (thread_data_t*) thread;
   uint32_t ID = td->id;
+  //printf("ini cpu %d\n", sched_getcpu());
   set_cpu(ID);
+  //printf("ini ID %d\n", ID);
   ssalloc_init();
 
   DS_TYPE* set = td->set;
@@ -162,6 +164,7 @@ test(void* thread)
 #endif
 
   int phys_id = sched_getcpu();
+  //printf("thread: %d cpu: %d\n", gettid(), phys_id); //help debuging
   RR_INIT(phys_id);
   barrier_cross(&barrier);
 
@@ -463,12 +466,37 @@ main(int argc, char **argv)
   thread_data_t* tds = (thread_data_t*) malloc(num_threads * sizeof(thread_data_t));
 
   long t;
+  //cpu_set_t cpuset;
   for(t = 0; t < num_threads; t++)
     {
       tds[t].id = t;
       tds[t].set = set;
       rc = pthread_create(&threads[t], &attr, test, tds + t);
+
+
+    // CPU_ZERO(&cpuset); // Initialize the CPU set to empty
+    // printf("%ld:\n", threads[t]);
+    // int rcselfdefine = pthread_getaffinity_np(threads[t], sizeof(cpu_set_t), &cpuset);
+    // if (rcselfdefine != 0) {
+    //     perror("pthread_getaffinity_np");
+    //     exit(EXIT_FAILURE);
+    // }
+    
+    // printf("CPU Affinity of the thread:\n");
+    // for (int i = 0; i < 40; i++) {
+    //     if (CPU_ISSET(i, &cpuset)) {
+    //         printf("CPU %d\n", i);
+    //     }
+    // }
+
+
+
+
       if (rc)
+
+
+
+      
 	{
 	  printf("ERROR; return code from pthread_create() is %d\n", rc);
 	  exit(-1);
@@ -476,9 +504,30 @@ main(int argc, char **argv)
         
     }
     
+
+
+
   /* Free attribute and wait for the other threads */
   pthread_attr_destroy(&attr);
     
+
+    
+    // CPU_ZERO(&cpuset); // Initialize the CPU set to empty
+    // printf("%ld:\n", threads[t]);
+    // int rcselfdefine = pthread_getaffinity_np(threads[t], sizeof(cpu_set_t), &cpuset);
+    // if (rcselfdefine != 0) {
+    //     perror("pthread_getaffinity_np");
+    //     exit(EXIT_FAILURE);
+    // }
+    
+    // printf("CPU Affinity of the thread:\n");
+    // for (int i = 0; i < 40; i++) {
+    //     if (CPU_ISSET(i, &cpuset)) {
+    //         printf("CPU %d\n", i);
+    //     }
+    // }
+
+
   barrier_cross(&barrier_global);
   gettimeofday(&start, NULL);
   nanosleep(&timeout, NULL);

@@ -275,16 +275,14 @@ extern "C" {
       8, 9, 10, 11, 12, 13, 14, 15, 
       16, 17, 18, 19, 20, 21, 22, 23, 
       24, 25, 26, 27, 28, 29, 30, 31, 
-      32, 33, 34, 35, 36, 37, 38, 39, 
-      40
+      32, 33, 34, 35, 36, 37, 38, 39
     };
   static uint8_t UNUSED the_sockets[] = {
       0, 0, 0, 0, 0, 0, 0, 0, 
       0, 0, 1, 1, 1, 1, 1, 1, 
       1, 1, 1, 1, 0, 0, 0, 0, 
       0, 0, 0, 0, 0, 0, 1, 1, 
-      1, 1, 1, 1, 1, 1, 1, 1, 
-      1
+      1, 1, 1, 1, 1, 1, 1, 1
   };
 #endif  /*  */  
 
@@ -763,7 +761,16 @@ static __attribute__ ((unused)) double eng_per_test_iter_nj[40][5] =
 	int cpu_use = the_cores[cpu];
 	cpu_set_t mask;
 	CPU_ZERO(&mask);
+  //printf("inner: cpu: %d  cpu_use: %d\n", cpu, cpu_use);
+  if(unlikely(cpu_use < 10))
 	CPU_SET(cpu_use, &mask);
+  else{
+    if(likely(cpu_use < 30))
+	  CPU_SET(10+cpu_use, &mask);
+    else
+    CPU_SET(cpu_use-20, &mask);
+  }
+
 #    if defined(PLATFORM_NUMA)
 	numa_set_preferred(get_cluster(cpu_use));
 #    endif

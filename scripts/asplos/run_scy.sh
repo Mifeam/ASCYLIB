@@ -345,8 +345,8 @@ then
     # ht ##################################################################
     if [ $do_ht -eq 1 ];
     then
-	structure=ht;
-
+	# structure=ht;
+    structure=seqht;
 	if [ ! "${MAKE_CLHT}0" = 0 ];
 	then
 	    echo "~~~~~~ Compiling CLHT";
@@ -357,8 +357,8 @@ then
 	fi;
 
 	${MAKE} -k ${structure} ${COMPILE_FLAGS};
-	mv bin/*${structure}* $ub;
-
+	# mv bin/*${structure}* $ub;
+  mv bin/sq-ht $ub;
 	echo "~~~~~~~~~~~~ Working on ${structure}";
 	for i in $initials;
 	do
@@ -450,8 +450,8 @@ then
     # ht ##################################################################
     if [ $do_ht -eq 1 ];
     then
-	structure=ht;
-
+	# structure=ht;
+  structure=seqht;
 	if [ ! "${MAKE_CLHT}0" = 0 ];
 	then
 	    echo "~~~~~~ Compiling CLHT";
@@ -462,8 +462,8 @@ then
 	fi;
 
 	${MAKE} -k ${structure} LATENCY=${LATENCY_AVG_TYPE} ${COMPILE_FLAGS};
-	mv bin/*${structure}* $ub;
-
+	# mv bin/*${structure}* $ub;
+  mv bin/sq-ht $ub;
 	echo "~~~~~~~~~~~~ Working on ${structure}";
 
 	for i in $initials;
